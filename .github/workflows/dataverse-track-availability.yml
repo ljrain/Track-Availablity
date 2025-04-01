@@ -26,7 +26,9 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: List build directory
-      run: ls
+      run: |
+        cd bin
+        ls
 
     - name: Run Dataverse Track Availability
       run: dotnet run --project ./path/to/your/project -- ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
