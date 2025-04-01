@@ -1,0 +1,32 @@
+name: Dataverse Track Availability
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Run Dataverse Track Availability
+      run: dotnet run --project ./path/to/your/project -- ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
+      env:
+        DATAVERSE_CONNECTION_STRING: ${{ secrets.DATAVERSE_CONNECTION_STRING }}
+        APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}

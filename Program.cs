@@ -1,24 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration.UserSecrets;
-
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
-using Track_Availablity;
+﻿using Track_Availablity;
 class Program
 {
     static async Task Main(string[] args)
     {
         Console.WriteLine("Dataverse Track Availability");
 
-        if(args.Length < 2)
+        string dataverseConnectionString = Environment.GetEnvironmentVariable("DATAVERSE_CONNECTION_STRING");
+        string applicationInsightsConnectionString = Environment.GetEnvironmentVariable("APPLICATION_INSIGHTS_CONNECTION_STRING");
+
+        if (string.IsNullOrEmpty(dataverseConnectionString) || string.IsNullOrEmpty(applicationInsightsConnectionString))
         {
-            Console.WriteLine("Usage: DataverseTrackAvailability <DataverseConnectionString> <ApplicationInsightsConnectionString>");
+            Console.WriteLine("Environment variables DATAVERSE_CONNECTION_STRING and APPLICATION_INSIGHTS_CONNECTION_STRING must be set.");
             return;
         }
-
-        string dataverseConnectionString = args[0];
-        string applicationInsightsConnectionString = args[1];
 
         DataverseTracker tracker = new DataverseTracker();
         tracker.TrackDataverseAvailability(dataverseConnectionString, applicationInsightsConnectionString);
