@@ -28,6 +28,8 @@ jobs:
     - name: List build directory
       run: |
         cd bin
+        cd Release
+        cd net8.0
         dir
 
     #- name: Run Dataverse Track Availability
