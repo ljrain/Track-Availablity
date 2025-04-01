@@ -28,6 +28,7 @@ jobs:
     - name: List build directory
       run: |
         cd bin
+        cd Release
         ls
 
     #- name: Run Dataverse Track Availability
