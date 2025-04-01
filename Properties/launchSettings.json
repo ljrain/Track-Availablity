@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Track-Availablity": {
+      "commandName": "Project",
+      "commandLineArgs": "AuthType=ClientSecret;ClientId=70dbbbb5-71bd-45d5-a23b-f23149d30c73;ClientSecret=1F58Q~F8aLc1gZ0MUnCNxypvUUm7fPNhQcq5JbT1;Url=https://ljr-dev1.crm9.dynamics.com/ InstrumentationKey=4e519c0d-e9b8-4d81-8208-4d3ae6a3a026;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=40759e0c-cc30-4f4c-8c03-19dfe5eb8a65"
+    }
+  }
+}
