@@ -28,11 +28,10 @@ jobs:
     - name: List build directory
       run: |
         cd bin
-        cd release
         ls
 
-    - name: Run Dataverse Track Availability
-      run: dotnet run --project ./path/to/your/project -- ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
-      env:
-        DATAVERSE_CONNECTION_STRING: ${{ secrets.DATAVERSE_CONNECTION_STRING }}
-        APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
+    #- name: Run Dataverse Track Availability
+    #  run: dotnet run --project ./path/to/your/project -- ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
+    #  env:
+    #    DATAVERSE_CONNECTION_STRING: ${{ secrets.DATAVERSE_CONNECTION_STRING }}
+    #    APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
