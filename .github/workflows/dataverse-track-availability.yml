@@ -19,8 +19,8 @@ jobs:
     steps:
     - name: Set up environment variables
       run: |
-        echo "DVCONNECTIONSTRING=${{ env.DATAVERSE_CONNECTION_STRING }}" >> $GITHUB_ENV
-        echo "AICONNECTIONSTRING=${{ env.APPLICATION_INSIGHTS_CONNECTION_STRING }}" >> $GITHUB_ENV
+        echo "DVCONNECTIONSTRING=${{ secrets.DATAVERSE_CONNECTION_STRING }}" >> $GITHUB_ENV
+        echo "AICONNECTIONSTRING=${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" >> $GITHUB_ENV
         echo $DVCONNECTIONSTRING 
         echo $AICONNECTIONSTRING  
     
