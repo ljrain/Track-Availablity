@@ -14,6 +14,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Set up environment variables
+      run: |
+       echo "Secret: ${{ secrets.AICONNECTIONSTRING }}"
+       echo "Secret: ${{ secrets.DVCONNECTIONSTRING }}"
+       echo "vars: ${{ vars.DATAVERSECONNECTIONSTRING }}"
+       echo "vars: ${{ vars.APPINSIGHTSCONNECTIONSTRING }}"
+    
     - name: Checkout repository
       uses: actions/checkout@v2
 
