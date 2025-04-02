@@ -12,6 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
+    environment: Tracker-Environment 
 
     steps:
     - name: Set up environment variables
