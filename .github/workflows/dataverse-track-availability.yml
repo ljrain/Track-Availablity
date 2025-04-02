@@ -6,9 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,18 +14,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up environment variables
-      run: |
-        echo "Secret: ${{ secrets.DATAVERSE_CONNECTION_STRING }}"
-        echo "Secret: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}"
-        echo "vars: ${{ vars.DATAVERSE_CONNECTION_STRING }}"
-        echo "vars: ${{ vars.APPLICATION_INSIGHTS_CONNECTION_STRING }}"    
-
-    
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '8.0.x'
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
 
     - name: Install dependencies
       run: dotnet restore
