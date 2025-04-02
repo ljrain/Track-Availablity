@@ -36,15 +36,8 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
 
-    - name: List build directory
-      run: |
-        cd bin
-        cd Release
-        cd net8.0
-        dir
-
     - name: Run Dataverse Track Availability
-      run: dotnet run --project ./bin/Release/net8.0/Track-Availability -- ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
+      run: dotnet run --project ./bin/Release/net8.0/Track-Availability ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
       env:
         DATAVERSE_CONNECTION_STRING: ${{ secrets.DATAVERSE_CONNECTION_STRING }}
         APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
