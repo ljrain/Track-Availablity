@@ -22,19 +22,21 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Cache NuGet packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}-${{ hashFiles('**/global.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
-
     - name: Build
       run: dotnet build --configuration Release
 
+    - name: Find the executable
+      id: find-executable
+      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
+      run: |
+         cd D:\a\\Dataverse-Custom-Availability\\Dataverse-Custom-Availability\bin\Release
+         dir
+         .\TrackAvailability.exe "${{ secrets.DATAVERSE_CONNECTION_STRING }}" "${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}"
+      
+
     - name: Run Dataverse Track Availability
-      run: dotnet run --project ./bin/Release/net8.0/Track-Availability ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
+      run: dotnet run --project ./bin/Release/net8.0/Track-Availability.exe ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
       env:
         DATAVERSE_CONNECTION_STRING: ${{ secrets.DATAVERSE_CONNECTION_STRING }}
         APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
