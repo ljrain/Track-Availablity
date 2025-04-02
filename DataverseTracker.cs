@@ -3,6 +3,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.PowerPlatform.Dataverse.Client;
+using System.Diagnostics;
 
 namespace Track_Availablity
 {
@@ -23,12 +24,14 @@ namespace Track_Availablity
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        private static AvailabilityTelemetry CheckDataverseAvailable(string connectionString)
+        private static AvailabilityTelemetry CheckDataverseAvailable(string connectionString, string runLocation = "GitHub", string name = "WhoAmI")
         {
             AvailabilityTelemetry availabilityTelemetry = new AvailabilityTelemetry();
-            availabilityTelemetry.RunLocation = "GitHub";
-            availabilityTelemetry.Name = "WhoAmI";
+            availabilityTelemetry.RunLocation = runLocation;
+            availabilityTelemetry.Name = name;
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             using (ServiceClient serviceClient = new ServiceClient(connectionString))
             {
                 if (serviceClient.IsReady)
@@ -38,16 +41,22 @@ namespace Track_Availablity
 
                     // Execute the request
                     WhoAmIResponse whoAmIResponse = (WhoAmIResponse)serviceClient.Execute(whoAmIRequest);
+                    stopwatch.Stop();
+
                     availabilityTelemetry.Success = serviceClient.IsReady;
                     availabilityTelemetry.Message = System.String.Format("Connected to {0}", serviceClient.ConnectedOrgFriendlyName);
+                    availabilityTelemetry.Duration = stopwatch.Elapsed;
 
                     // Output the results
                     Console.WriteLine("Connected to {0} {1}", serviceClient.ConnectedOrgFriendlyName, serviceClient.IsReady);
                 }
                 else
                 {
+                    stopwatch.Stop();
                     Console.WriteLine("Failed to connect to Dataverse.{0}", serviceClient.LastError);
                     availabilityTelemetry.Success = false;
+                    availabilityTelemetry.Message = System.String.Format("Failed to connect to Dataverse.{0}", serviceClient.LastError);
+                    availabilityTelemetry.Duration = stopwatch.Elapsed;
                 }
             }
             return (availabilityTelemetry);
