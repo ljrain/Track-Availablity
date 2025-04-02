@@ -33,11 +33,13 @@ jobs:
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: |
-         cd net8.0
          cd bin
          cd Release
          dir
          .\Track-Availablity.exe "${{ secrets.DATAVERSE_CONNECTION_STRING }}" "${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}"
+      
+    - name: Directory check
+      run: dir
       
 
 #    - name: Run Dataverse Track Availability
