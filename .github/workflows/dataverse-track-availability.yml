@@ -19,19 +19,11 @@ jobs:
     steps:
     - name: Set up environment variables
       run: |
-<<<<<<< Updated upstream
-        echo "DVCONNECTIONSTRING=${{ secrets.DATAVERSE_CONNECTION_STRING }}" >> $GITHUB_ENV
-        echo "AICONNECTIONSTRING=${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" >> $GITHUB_ENV
-        echo $GITHUB_ENV.$DVCONNECTIONSTRING 
-        echo $AICONNECTIONSTRING  
-    
-=======
         echo "Secret: ${{ secrets.DATAVERSE_CONNECTION_STRING }}"
         echo "Secret: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}"
         echo "vars: ${{ vars.DATAVERSE_CONNECTION_STRING }}"
         echo "vars: ${{ vars.APPLICATION_INSIGHTS_CONNECTION_STRING }}"
 
->>>>>>> Stashed changes
     - name: Checkout repository
       uses: actions/checkout@v2
 
