@@ -3,6 +3,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.PowerPlatform.Dataverse.Client;
+using System;
 using System.Diagnostics;
 
 namespace Track_Availablity
@@ -48,12 +49,22 @@ namespace Track_Availablity
                     availabilityTelemetry.Duration = stopwatch.Elapsed;
 
                     // Output the results
-                    Console.WriteLine("Connected to {0} {1}", serviceClient.ConnectedOrgFriendlyName, serviceClient.IsReady);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("Connected to ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write(serviceClient.ConnectedOrgFriendlyName);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($" {serviceClient.IsReady}");
+                    Console.ResetColor();
                 }
                 else
                 {
                     stopwatch.Stop();
-                    Console.WriteLine("Failed to connect to Dataverse.{0}", serviceClient.LastError);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Failed to connect to Dataverse. ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(serviceClient.LastError);
+                    Console.ResetColor();
                     availabilityTelemetry.Success = false;
                     availabilityTelemetry.Message = System.String.Format("Failed to connect to Dataverse.{0}", serviceClient.LastError);
                     availabilityTelemetry.Duration = stopwatch.Elapsed;

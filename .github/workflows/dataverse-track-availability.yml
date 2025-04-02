@@ -2,7 +2,7 @@ name: Dataverse Track Availability
 
 on:
   schedule:
-   - cron: '*/30 * * * *'  # Every 30 minutes
+    - cron: '*/30 * * * *' # Every 30 minutes
   push:
     branches:
       - main
@@ -56,10 +56,3 @@ jobs:
       
     - name: Directory check
       run: dir
-      
-
-#    - name: Run Dataverse Track Availability
-#      run: dotnet run --project ./bin/Release/net8.0/Track-Availability.exe ${{ secrets.DATAVERSE_CONNECTION_STRING }} ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
-#      env:
-#        DATAVERSE_CONNECTION_STRING: ${{ secrets.DATAVERSE_CONNECTION_STRING }}
-#        APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
