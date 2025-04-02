@@ -5,8 +5,8 @@ class Program
     {
         Console.WriteLine("Dataverse Track Availability");
 
-        string dataverseConnectionString = Environment.GetEnvironmentVariable("DATAVERSE_CONNECTION_STRING");
-        string applicationInsightsConnectionString = Environment.GetEnvironmentVariable("APPLICATION_INSIGHTS_CONNECTION_STRING");
+        string dataverseConnectionString = args[0].ToString();
+        string applicationInsightsConnectionString = args[1].ToString();
 
         if (string.IsNullOrEmpty(dataverseConnectionString) || string.IsNullOrEmpty(applicationInsightsConnectionString))
         {
