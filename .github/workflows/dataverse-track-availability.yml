@@ -35,6 +35,7 @@ jobs:
       run: |
          cd bin
          cd Release
+         cd net8.0
          dir
          .\Track-Availablity.exe "${{ secrets.DATAVERSE_CONNECTION_STRING }}" "${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}"
       
