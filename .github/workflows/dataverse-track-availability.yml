@@ -21,7 +21,7 @@ jobs:
       run: |
         echo "DVCONNECTIONSTRING=${{ secrets.DATAVERSE_CONNECTION_STRING }}" >> $GITHUB_ENV
         echo "AICONNECTIONSTRING=${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}" >> $GITHUB_ENV
-        echo $DVCONNECTIONSTRING 
+        echo $GITHUB_ENV.$DVCONNECTIONSTRING 
         echo $AICONNECTIONSTRING  
     
     - name: Checkout repository
