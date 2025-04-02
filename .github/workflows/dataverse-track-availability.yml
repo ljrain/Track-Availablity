@@ -19,16 +19,16 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Install dependencies
+      run: dotnet restore
+
     - name: Cache NuGet packages
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}-${{ hashFiles('**/global.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
-
-    - name: Install dependencies
-      run: dotnet restore
 
     - name: Build
       run: dotnet build --configuration Release
